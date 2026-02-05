@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <!-- Title -->
+    <h2 class="text-center mb-4">{{ item.name }}</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="sketch-card p-4">
+
+                <!-- Image -->
+                <div class="text-center mb-4">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" class="img-fluid rounded sketch-img">
+                    {% else %}
+                    <img src="{% static 'default/item.png' %}" class="img-fluid rounded sketch-img">
+                    {% endif %}
+                </div>
+
+                <!-- Info -->
+                <p><strong>Category:</strong> {{ item.category }}</p>
+                <p><strong>Description:</strong> {{ item.description }}</p>
+                <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+                <p><strong>Location:</strong> {{ item.location }}</p>
+                <p><strong>Price:</strong> {{ item.price }}</p>
+                <p><strong>Serial Number:</strong> {{ item.serial_number }}</p>
+                <p><strong>Purchase Date:</strong> {{ item.purchase_date }}</p>
+                <p><strong>Warranty Expiry:</strong> {{ item.warranty_expiry }}</p>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-center gap-3 mt-4">
+
+                    <a href="{% url 'item_edit' item.id %}" class="sketch-btn">
+                        Edit
+                    </a>
+
+                    <form action="{% url 'item_delete' item.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="sketch-btn danger">
+                            Delete
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

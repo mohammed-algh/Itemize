@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<!-- Add Button -->
+<div class="row mb-4">
+    <div class="col text-center unselectable">
+        <a href="{% url 'add_item' %}" class="sketch-btn">
+            Add Item
+        </a>
+    </div>
+</div>
+
+<!-- Items List -->
+<div class="row">
+    <div class="col-md-8 mx-auto">
+
+        {% if items %}
+        <div class="list-group">
+
+            {% for item in items %}
+            <a href="{% url 'item_detail' item.id %}">
+                <div class="list-group-item d-flex align-items-center justify-content-between sketch-btn mb-3">
+
+                    <div class="d-flex align-items-center unselectable">
+
+                        <!-- Item Image -->
+                        {% if item.image %}
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}" class="rounded me-3"
+                            style="width:60px;height:60px;object-fit:cover;">
+                        {% else %}
+                        <img src="{% static 'default/item.png' %}" alt="Default Image" class="rounded me-3"
+                            style="width:60px;height:60px;object-fit:cover;">
+                        {% endif %}
+
+                        <!-- Item Text -->
+                        <div>
+                            <strong>{{ item.name }}</strong><br>
+                            <small class="text-muted">
+                                {{ item.description }}
+                            </small>
+                        </div>
+
+                    </div>
+
+                </div>
+            </a>
+            {% endfor %}
+
+        </div>
+        {% else %}
+        <p class="text-center text-muted">
+            No items yet. Add your first item above.
+        </p>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

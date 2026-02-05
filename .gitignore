@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Virtual Environments
+venv/
+venvw/
+env/
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+local_settings.py
+
+# Environment Variables
+.env
+
+# Docker
+*.log
+
+# VS Code
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Node (if ever used)
+node_modules/
